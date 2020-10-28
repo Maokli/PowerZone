@@ -14,6 +14,7 @@ namespace API.Controllers
 {
     [ApiController]
     [Route("api/[controller]")]
+    [Authorize(Roles = "Manager")]
     public class ManagerController : ControllerBase
     {
     private readonly IMapper _mapper;
@@ -33,7 +34,6 @@ namespace API.Controllers
     }
 
     //GET: Returns an array of clients
-    [Authorize]
     [HttpGet]
     public async Task<ActionResult<IReadOnlyList<ClientDTO>>> GetClients()
     {

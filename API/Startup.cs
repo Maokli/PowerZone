@@ -19,7 +19,6 @@ using AutoMapper;
 using API.Models;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Authentication.Cookies;
-using Is4RoleDemo.Services;
 using Microsoft.IdentityModel.Tokens;
 using System.Text;
 using API.Services;
@@ -38,33 +37,42 @@ namespace API
     // This method gets called by the runtime. Use this method to add services to the container.
     public void ConfigureServices(IServiceCollection services)
     {
-     
-       
-        services.AddControllers();
-       services.AddDbContext<IdentityContext>(x =>
-       x.UseSqlServer(_configuration.GetConnectionString("Sql")));
-        services.AddScoped<ITokenService,TokenService>();
 
-       
 
-       services.AddIdentity<Client, IdentityRole>()
-        .AddRoles<IdentityRole>()
-        .AddEntityFrameworkStores<IdentityContext>()
-        .AddDefaultTokenProviders();
-        services.AddMvc();
-        services.AddAuthentication(JwtBearerDefaults.AuthenticationScheme)
-        .AddJwtBearer(opt => {
-          opt.TokenValidationParameters =
-           new Microsoft.IdentityModel.Tokens.TokenValidationParameters{
-             ValidateIssuerSigningKey = true,
-             IssuerSigningKey = new SymmetricSecurityKey(Encoding.UTF8.
-             GetBytes(_configuration["Token:Key"])),
-             ValidIssuer = _configuration["Token:Issuer"],
-             ValidateIssuer = false,
-           };
-        });
+      services.AddControllers();
+      services.AddDbContext<IdentityContext>(x =>
+      x.UseSqlServer(_configuration.GetConnectionString("Sql")));
+      services.AddScoped<ITokenService, TokenService>();
 
-       
+
+
+
+
+      services.AddIdentityCore<Client>()
+      .AddSignInManager<SignInManager<Client>>()
+       .AddRoles<IdentityRole>()
+       .AddEntityFrameworkStores<IdentityContext>()
+       .AddDefaultTokenProviders();
+
+      services.AddMvc();
+      services.AddAntiforgery();
+
+      services.AddAuthentication(JwtBearerDefaults.AuthenticationScheme)
+      .AddJwtBearer(opt =>
+      {
+        opt.TokenValidationParameters =
+         new Microsoft.IdentityModel.Tokens.TokenValidationParameters
+         {
+           ValidateIssuerSigningKey = true,
+           IssuerSigningKey = new SymmetricSecurityKey(Encoding.UTF8.
+           GetBytes(_configuration["Token:Key"])),
+           ValidIssuer = _configuration["Token:Issuer"],
+           ValidateIssuer = false,
+           ValidateAudience = false
+         };
+      });
+
+
       services.AddAutoMapper(typeof(ClientProfile));
     }
 

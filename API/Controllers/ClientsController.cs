@@ -38,7 +38,6 @@ namespace API.Controllers
     }
 
     [AllowAnonymous]
-    //[ValidateAntiForgeryToken]
     [HttpPost("signup")]
     public async Task<ActionResult> SignUp(ClientDTO client)
     {
@@ -84,7 +83,6 @@ namespace API.Controllers
     }
 
     [AllowAnonymous]
-    // [ValidateAntiForgeryToken]
     [HttpPost("login")]
     public async Task<ActionResult> Login(ClientLogin client)
     {
