@@ -40,10 +40,6 @@ namespace API.Controllers
       var clients = await _context.Users.Include(x => x.MembershipType).ToListAsync();
       var data = _mapper.
       Map<IReadOnlyList<Client>,IReadOnlyList<ClientDTO>>(clients);
-      foreach (var client in data)
-      {
-          client.SetMembership();
-      }
       return Ok(data);
     }
 

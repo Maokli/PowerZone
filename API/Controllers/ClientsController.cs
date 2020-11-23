@@ -20,7 +20,7 @@ namespace API.Controllers
   {
     private readonly IdentityContext _context;
     private readonly IMapper _mapper;
-
+  
     private UserManager<Client> _userManager;
     private SignInManager<Client> _signInManager;
 
