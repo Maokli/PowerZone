@@ -1,0 +1,41 @@
+.btn-1{
+  text-align: center;
+  position: relative;
+  transition: all .35s;
+  display: block;
+}
+
+.btn-1 span{
+  position: relative;
+  z-index: 2;
+}
+
+.btn-1:after{
+  position: absolute;
+  content: "";
+  top: 0;
+  left: 0;
+  width: 0;
+  height: 100%;
+  background: #e53e3e;
+  transition: all .35s;
+}
+
+.btn-1:hover{
+  color: #000;
+}
+
+.btn-1:hover:after{
+  width: 100%;
+}
+.btn-1:focus{
+  color:#000;
+  border-color:#9b2c2c;
+}
+.btn-1:focus:after{
+  width:100%;
+  background:#9b2c2c;
+}
+.login {
+  background: rgba(0,0,0,0.75);
+}

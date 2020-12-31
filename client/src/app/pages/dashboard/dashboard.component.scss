@@ -1,0 +1,10 @@
+#form {
+  top:50%;
+  left: 50%;
+  background-color: brown;
+  z-index: 50;
+}
+table input:focus{
+  outline-color: cadetblue;
+  outline-width: 5px;
+}
