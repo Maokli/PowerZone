@@ -10,6 +10,7 @@ using System;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Authorization;
 using API.Services;
+using Microsoft.EntityFrameworkCore;
 
 namespace API.Controllers
 {
@@ -117,6 +118,14 @@ namespace API.Controllers
       }
 
       return BadRequest("Wrong Password");
+    }
+
+    [HttpGet("membership")]
+    public async Task<ActionResult<IReadOnlyList<MembershipTypeDTO>>>
+     GetMemberships(){
+      var data = await _context.MembershipTypes.ToListAsync();
+      return Ok(_mapper.Map<IReadOnlyList<MembershipType>,
+      IReadOnlyList<MembershipTypeDTO>>(data));
     }
 
 

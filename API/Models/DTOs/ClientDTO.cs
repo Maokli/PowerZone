@@ -22,7 +22,7 @@ namespace API.Models.DTOs
         [Required]
         public int MembershipTypeId { get; set; }
 
-        public string Membership { get; set; }
+        public MembershipType MembershipType { get; set; }
 
         [Required]
         [EmailAddress]
@@ -34,25 +34,9 @@ namespace API.Models.DTOs
 
         public string Role { get; set; }
 
-        public void SetMembership(){
-            if(MembershipTypeId != 0){
-                switch (MembershipTypeId)
-                {
-                    case 1:{
-                        Membership = "Yearly";
-                        break;
-                    }
-                    case 2:{
-                        Membership = "Monthly";
-                        break;
-                    }
-                    
-                    default:
-                        Membership = null;
-                        break;
-                }
-            }
-        }
+        
+
+        
 
     }
 }

@@ -54,7 +54,6 @@ namespace API.Controllers
       if(client != null){
 
         var ClientDto = _mapper.Map<Client,ClientDTO>(client);
-        ClientDto.SetMembership();
         return Ok(ClientDto);
         }
       return NotFound();
@@ -128,11 +127,7 @@ namespace API.Controllers
 
     }
 
-    [HttpGet("membership")]
-    public async Task<ActionResult<IReadOnlyList<MembershipTypeDTO>>> GetMemberships(){
-      var data = await _context.MembershipTypes.ToListAsync();
-      return Ok(_mapper.Map<IReadOnlyList<MembershipType>,IReadOnlyList<MembershipTypeDTO>>(data));
-    }
+    
 
     [HttpGet("membership/{id}")]
     public async Task<ActionResult<MembershipTypeDTO>> GetMembership(int id){
